@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body
+  class="flex items-center justify-center px-4 overflow-x-hidden text-white select-none min-h-dvh bg" id="star"
+>
+  <div
+    class="w-full  sm:max-w-xl
+           my-6 p-5 sm:p-7
+           bg-white/10 backdrop-blur-xl
+           rounded-3xl
+           border border-white/10
+           shadow-[0_0_60px_rgba(99,102,241,0.25)]
+           transition-all duration-500
+           hover:shadow-[0_0_90px_rgba(34,211,238,0.35)]
+           hover:-translate-y-1 z-50"
+  >
+    <div class="flex items-center justify-between mb-4 text-sm">
+      <div class="flex gap-1 text-cyan-300">
+        امتیاز:
+        <span class="font-bold text-white">20 /</span>
+        <span id="showscore" class="font-bold text-cyan-400">0</span>
+      </div>
+
+      <div class="flex gap-1 text-violet-300">
+        سوال:
+        <span id="countquestion" class="font-bold text-white"></span>
+      </div>
+    </div>
+    <div class="flex gap-2 pb-2 mb-4 border-b border-white/20 sm:mb-6">
+      <span id="id" class="font-bold text-cyan-400"></span>
+      <p id="question" class="text-sm font-bold leading-relaxed sm:text-lg"></p>
+    </div>
+    <div class="space-y-2">
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+    </div>
+    <button
+      class="w-full mt-6 py-2
+             rounded-2xl font-extrabold text-lg
+             bg-gradient-to-r from-cyan-400 via-indigo-500 to-violet-500
+             shadow-[0_0_30px_rgba(99,102,241,0.6)]
+             hover:scale-[1.03]
+             hover:shadow-[0_0_50px_rgba(34,211,238,0.8)]
+             "
+    >
+      ثبت پاسخ
+    </button>
+
+  </div>
+  <!-- alert --> <div id="scoreAlertPersian" class="fixed inset-0 items-center justify-center bg-black/90 z-[999] hidden "> <div class="relative w-[85%] max-w-md p-8 md:p-10 rounded-xl border border-blue-500/50 shadow-[0_0_60px_10px_rgba(168,85,247,0.2)] bg-blue-900/45 backdrop-blur-sm text-center transition-all duration-500 animate-scale-in"> <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(168,85,247,0.2),_transparent_80%)] pointer-events-none rounded-xl"></div>
+   <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-6 drop-shadow-[0_0_10px_#a855f7]"> امتیاز شما </h2>
+   <p class="text-7xl md:text-8xl font-black  mb-6 drop-shadow-[0_0_20px_#34d399]" id="scorepercent"> <span class="ml-1 text-4xl text-white md:text-5xl">%</span> <img src="img/wired-flat-1103-confetti-hover-pinch.gif" alt="" > </p>
+   <p class="mb-8 text-sm font-medium text-gray-200 md:text-lg" id="tahlil"> </p> <a href="index2.html" class="px-8 py-3 text-base font-bold rounded-full transition duration-300 bg-gradient-to-r from-blue-600 to-indigo-500 text-white hover:from-purple-500 hover:to-indigo-400 hover:shadow-[0_0_20px_#c084fc]" id="closealert"> تایید و بستن </a> </div> </div>
+</body>
+  <script>
+  const data = [
+  {
+    id: 1,
+    question: 'چرا ارتباط با طراح برای یک توسعه‌دهنده فرانت‌اند مهم است؟',
+    answer: {
+      ans1: 'الف) فقط برای گرفتن تصاویر',
+      ans2: 'ب) برای درک بهتر تجربه کاربری و طراحی بصری',
+      ans3: 'ج) برای نوشتن کد بک‌اند',
+      ans4: 'د) برای مدیریت سرورها'
+    },
+    number: 1
+  },
+  {
+    id: 2,
+    question: 'کدام ابزار به توسعه‌دهنده کمک می‌کند تا طراحی را بهتر اجرا کند؟',
+    answer: {
+      ans1: 'الف) Photoshop و Illustrator',
+      ans2: 'ب) Slack و Trello',
+      ans3: 'ج) Git و GitHub',
+      ans4: 'د) MySQL'
+    },
+    number: 1
+  },
+  {
+    id: 3,
+    question: 'در طراحی ریسپانسیو، توسعه‌دهنده باید با طراح چگونه هماهنگ باشد؟',
+    answer: {
+      ans2: 'الف) نیاز به هماهنگی درباره نقاط شکست (breakpoints) و گریدها',
+      ans1: 'ب) فقط اندازه فونت‌ها مهم است',
+      ans3: 'ج) طراح مسئول ریسپانسیو نیست',
+      ans4: 'د) فقط رنگ‌ها را رعایت کند'
+    },
+    number: 0
+  },
+  {
+    id: 4,
+    question: 'چه زمانی یک توسعه‌دهنده باید از طراح بازخورد بگیرد؟',
+    answer: {
+      ans1: 'الف) فقط در پایان پروژه',
+      ans2: 'ب) هرگز',
+      ans3: 'ج) فقط وقتی خطا رخ دهد',
+      ans4: 'د) در طول توسعه و پس از هر بخش اصلی',
+    },
+    number: 3
+  },
+  {
+    id: 5,
+    question: 'کدام روش برای انتقال دقیق طرح‌ها به فرانت‌اند مناسب است؟',
+    answer: {
+      ans1: 'الف) ارسال عکس از دسکتاپ',
+      ans2: 'ب) استفاده از فایل‌های طراحی با اندازه واقعی',
+      ans3: 'ج) گفتن شفاهی',
+      ans4: 'د) تغییر دلخواه بدون هماهنگی'
+    },
+    number: 1
+  },
+  {
+    id: 6,
+    question: 'سیستم طراحی (Design System) چه مزیتی دارد؟',
+    answer: {
+      ans1: 'الف) کاهش هماهنگی بین طراح و توسعه‌دهنده',
+      ans2: 'ب) افزایش سردرگمی',
+      ans3: 'ج) استفاده از رنگ‌ها تصادفی',
+      ans4: 'د) حفظ انسجام و استانداردسازی طراحی بین تیم '
+    },
+    number: 3
+  },
+  {
+    id: 7,
+    question: 'ابزار Zeplin یا Figma چه کمکی می‌کنند؟',
+    answer: {
+      ans1: 'الف) مدیریت پایگاه داده',
+      ans2: 'ب) انتقال دقیق مشخصات طراحی به فرانت‌اند',
+      ans3: 'ج) افزایش سرعت سرور',
+      ans4: 'د) تست امنیت'
+    },
+    number: 1
+  },
+  {
+    id: 8,
+    question: 'در پروژه تیمی فرانت‌اند، بهترین روش برای ارتباط با طراح چیست؟',
+    answer: {
+      ans1: 'الف) ایمیل هفته‌ای',
+      ans2: 'ب) تماس تلفنی فقط در مواقع اضطراری',
+      ans3: 'ج) جلسات کوتاه روزانه',
+      ans4: 'د) هیچ روش خاصی نیاز نیست'
+    },
+    number: 2
+  },
+  {
+    id: 9,
+    question: 'در صورت اختلاف بین طراحی و پیاده‌سازی، چه باید کرد؟',
+    answer: {
+      ans1: 'الف) طراح را نادیده بگیرد',
+      ans2: 'ب) بدون هماهنگی تغییر دهد',
+      ans3: 'ج) بحث و بررسی برای رسیدن به بهترین راهکار',
+      ans4: 'د) پروژه را متوقف کند'
+    },
+    number: 2
+  },
+  {
+    id: 10,
+    question: 'Mockup در ارتباط توسعه‌دهنده و طراح چه کاربردی دارد؟',
+    answer: {
+      ans1: 'الف) جایگزین کد است',
+      ans2: 'ب) تصویر اولیه از طراحی برای راهنمایی فرانت‌اند',
+      ans3: 'ج) فقط برای بک‌اند استفاده می‌شود',
+      ans4: 'د) تست امنیتی'
+    },
+    number: 1
+  },
+  {
+    id: 11,
+    question: 'کدام مورد باعث کاهش خطا در اجرای طرح می‌شود؟',
+    answer: {
+      ans1: 'الف) استفاده از رنگ‌ها دلخواه',
+      ans2: 'ب) هماهنگی دقیق با طراح',
+      ans3: 'ج) فراموش کردن فونت‌ها',
+      ans4: 'د) تغییر بدون اطلاع طراح'
+    },
+    number: 1
+  },
+  {
+    id: 12,
+    question: 'تبادل فایل SVG بین طراح و فرانت‌اند چه مزیتی دارد؟',
+    answer: {
+      ans1: 'الف) کاهش حجم فایل و حفظ کیفیت',
+      ans2: 'ب) افزایش حجم فایل',
+      ans3: 'ج) فقط برای بک‌اند مناسب است',
+      ans4: 'د) مانع ریسپانسیو شدن می‌شود'
+    },
+    number: 0
+  },
+  {
+    id: 13,
+    question: 'چرا مستندسازی طراحی برای توسعه‌دهنده مهم است؟',
+    answer: {
+      ans1: 'الف) برای یادآوری رنگ‌ها، فونت‌ها و فاصله‌ها',
+      ans2: 'ب) فقط برای طراح مهم است',
+      ans3: 'ج) غیرضروری است',
+      ans4: 'د) باعث کاهش سرعت می‌شود'
+    },
+    number: 0
+  },
+  {
+    id: 14,
+    question: 'Style Guide چه کاربردی دارد؟',
+    answer: {
+      ans1: 'الف) فهرست اجزای طراحی و قوانین آن‌ها',
+      ans2: 'ب) فقط برای بک‌اند',
+      ans3: 'ج) جایگزین CSS نمی‌شود',
+      ans4: 'د) برای طراحی دیتابیس'
+    },
+    number: 0
+  },
+  {
+    id: 15,
+    question: 'در طراحی تعاملی (Interactive Design)، توسعه‌دهنده باید با طراح چه هماهنگی داشته باشد؟',
+    answer: {
+      ans1: 'الف) فقط ظاهر مهم است',
+      ans2: 'ب) انیمیشن‌ها و رفتارهای تعاملی',
+      ans3: 'ج) دیتابیس را طراح می‌سازد',
+      ans4: 'د) سرور را طراح کنترل می‌کند'
+    },
+    number: 1
+  },
+  {
+    id: 16,
+    question: 'کدام شیوه کمک می‌کند که تغییرات طراحی سریع‌تر در کد اعمال شود؟',
+    answer: {
+      ans1: 'الف) استفاده از طراحی ثابت',
+      ans2: 'ب) ارتباط مستمر و بررسی تغییرات',
+      ans3: 'ج) نادیده گرفتن تغییرات',
+      ans4: 'د) توسعه کامل قبل از هماهنگی'
+    },
+    number: 1
+  },
+  {
+    id: 17,
+    question: 'واحدهای اندازه‌گیری در طراحی (px, em, rem) چرا مهم است؟',
+    answer: {
+      ans1: 'الف) فقط برای طراح',
+      ans2: 'ب) فقط برای بک‌اند',
+      ans3: 'ج) غیرضروری است',
+      ans4: 'د) برای هماهنگی طراحی و فرانت‌اند',
+    },
+    number: 3
+  },
+  {
+    id: 18,
+    question: 'چرا پروتوتایپ اهمیت دارد؟',
+    answer: {
+      ans1: 'الف) جایگزین کدنویسی',
+      ans2: 'ب) برای بررسی تعامل و تجربه کاربری قبل از توسعه',
+      ans3: 'ج) برای طراحی دیتابیس',
+      ans4: 'د) غیرضروری است'
+    },
+    number: 1
+  },
+  {
+    id: 19,
+    question: 'چه کاری باعث کاهش اختلافات طراح و توسعه‌دهنده می‌شود؟',
+    answer: {
+      ans1: 'الف) تغییر دلخواه کد',
+      ans2: 'ب) عدم بازخورد',
+      ans3: 'ج) نادیده گرفتن Mockup',
+      ans4: 'د) هماهنگی و مستندسازی',
+    },
+    number: 3
+  },
+  {
+    id: 20,
+    question: 'کدام روش برای جمع‌آوری بازخورد طراحی از کاربران مفید است؟',
+    answer: {
+      ans1: 'الف) تست کاربری و نمونه اولیه',
+      ans2: 'ب) حدس و گمان',
+      ans3: 'ج) تغییر دلخواه بدون بازخورد',
+      ans4: 'د) استفاده از رنگ‌های متفاوت'
+    },
+    number: 0
+  }
+];
+  </script>
+  <script src="script1.js"></script>
+</html>

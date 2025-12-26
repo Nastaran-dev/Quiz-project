@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>game</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="master.css" />
+    <style>
+      .move{
+        transform: translateX(-10%);
+        transition: 1s;
+      }
+      .mo{
+        transition: 20s;
+       >span{
+        &:nth-of-type(2){
+          transform: translateY(-500px);
+        }
+        &:nth-of-type(1){
+          transform: rotate(45deg);
+          left: 0;
+        }
+        &:nth-of-type(3){
+          transform: rotate(-45deg);
+          left: 0;
+        }
+       }
+      }
+    </style>
+  </head>
+  <body class="overflow-hidden">
+    
+    <div
+      class="relative flex flex-col items-center justify-center gap-3 p-4 min-h-dvh px-7 bg "
+      id="star"
+     
+    >
+    <div class=" fixed flex flex-wrap h-[50px] w-[30px] justify-evenly content-center  text-white right-5 top-3 text-[30px] rotate-[90deg]  *:duration-700 transition-all cursor-pointer z-[999]  *:absolute  *:flex    " id="icon">
+      <span class="left-[5px]">|</span>
+      <span class="left-[13px]">|</span>
+      <span class="left-[22px]">|</span>
+    </div>
+    <div class="w-[200px] h-[200px]  absolute top-10 right-0 translate-x-[100%] duration-1000 z-[999]" id="ham">
+      <figure class="relative overflow-hidden transition-all duration-1000 rounded-3xl"><img src="img/photo_2025-12-25_15-17-37.jpg" alt="" class=duration-1000"></figure>
+       <div class="flex absolute  top-[200px] gap-4 w-full justify-center *:md:w-[30px] *:w-[25px]   *:duration-700">
+     <a href="https://github.com/nastaran-dev" target="_blank" class="hover:-translate-y-4 abc"><img src="img/github-fill.svg" alt=""></a>
+     <a href="https://www.linkedin.com/in/nastaran-mohammadi-1515a8382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="hover:-translate-y-4 abc"><img src="img/linkedin-box-fill.svg" alt=""></a>
+     <a href="https://instagram.com/nastaran__dev" target="_blank" class="hover:-translate-y-4 abc"><img src="img/instagram-fill.svg" alt=""></a>
+    </div>
+    </div>
+      <p
+        href="index2.html"
+        class="px-5 py-6 text-md md:text-lg  rounded-[20px] transition duration-300 ease-in-out shadow-inner hover:shadow-lg border-2 active:scale-95 focus:outline-none focus:ring-4 ab  border-[#00ffff]  text-emerald-100  text-justify lg:w-1/2 leading-9   cursor-pointer "
+     
+      >
+      به <span class="text-[#00ffff]">پرنیان</span> خوش آمدید!<br>
+آماده‌اید تا مهارت‌های فرانت‌اند خود را از تئوری به عملی تبدیل کنید؟
+سایت پرنیان اینجاست تا با کوییزهای تخصصیِ مبتنی بر نیازهای بازار کار، توانایی کدخوانی و دیباگینگ شما را به چالش بکشد.
+همین حالا شروع کنید و قدرت واقعی خود را کشف نمایید!
+      </p>
+      <a
+        href="index2.html"
+        class="px-12 py-2 md:py-4 text-xl font-extrabold rounded-[20px] transition duration-300 ease-in-out shadow-inner hover:shadow-lg border-2 active:scale-95 focus:outline-none focus:ring-4 ab   border-[#00ffff] text-[#00ffff] bg-black"
+        aria-label="Start the Quiz"
+      >
+        شروع تست
+      </a>
+    </div>
+   
+    <div class="absolute bottom-2  flex flex-col gap-2 justify-items-center font-serif  w-full text-white text-[10px] sm:opacity-0 md:opacity-100 md:text-[20px]">
+      <a href="https://trainingsitedesign.ir/">  <img src="img/pixelcut-export-Copy.png" alt="" class="w-[70px] md:w-[100px] object-cover  mx-auto"></a>
+      <p class="flex justify-center capitalize">nastaran mohammadi  | design & development 2025</p>
+    </div>
+  </body>
+ <script>
+      const icon = document.getElementById('icon')
+      const ham = document.getElementById('ham')
+      icon.addEventListener('click' , (e)=>{
+       icon.classList.toggle('mo')
+       ham.classList.toggle('move')
+    })
+    </script>
+  <script src="script1.js"></script>
+</html>

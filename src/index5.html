@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body
+  class="flex items-center justify-center px-4 overflow-x-hidden text-white select-none min-h-dvh bg" id="star"
+>
+  <div
+    class="w-full  sm:max-w-xl
+           my-6 p-5 sm:p-7
+           bg-white/10 backdrop-blur-xl
+           rounded-3xl
+           border border-white/10
+           shadow-[0_0_60px_rgba(99,102,241,0.25)]
+           transition-all duration-500
+           hover:shadow-[0_0_90px_rgba(34,211,238,0.35)]
+           hover:-translate-y-1 z-50"
+  >
+    <div class="flex items-center justify-between mb-4 text-sm">
+      <div class="flex gap-1 text-cyan-300">
+        امتیاز:
+        <span class="font-bold text-white">20 /</span>
+        <span id="showscore" class="font-bold text-cyan-400">0</span>
+      </div>
+
+      <div class="flex gap-1 text-violet-300">
+        سوال:
+        <span id="countquestion" class="font-bold text-white"></span>
+      </div>
+    </div>
+    <div class="flex gap-2 pb-2 mb-4 border-b border-white/20 sm:mb-6">
+      <span id="id" class="font-bold text-cyan-400"></span>
+      <p id="question" class="text-sm font-bold leading-relaxed sm:text-lg"></p>
+    </div>
+    <div class="space-y-2">
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+    </div>
+    <button
+      class="w-full mt-6 py-2
+             rounded-2xl font-extrabold text-lg
+             bg-gradient-to-r from-cyan-400 via-indigo-500 to-violet-500
+             shadow-[0_0_30px_rgba(99,102,241,0.6)]
+             hover:scale-[1.03]
+             hover:shadow-[0_0_50px_rgba(34,211,238,0.8)]
+             "
+    >
+      ثبت پاسخ
+    </button>
+
+  </div>
+  <!-- alert --> <div id="scoreAlertPersian" class="fixed inset-0 items-center justify-center bg-black/90 z-[999] hidden "> <div class="relative w-[85%] max-w-md p-8 md:p-10 rounded-xl border border-blue-500/50 shadow-[0_0_60px_10px_rgba(168,85,247,0.2)] bg-blue-900/45 backdrop-blur-sm text-center transition-all duration-500 animate-scale-in"> <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(168,85,247,0.2),_transparent_80%)] pointer-events-none rounded-xl"></div>
+   <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-6 drop-shadow-[0_0_10px_#a855f7]"> امتیاز شما </h2>
+   <p class="text-7xl md:text-8xl font-black  mb-6 drop-shadow-[0_0_20px_#34d399]" id="scorepercent"> <span class="ml-1 text-4xl text-white md:text-5xl">%</span> <img src="img/wired-flat-1103-confetti-hover-pinch.gif" alt="" > </p>
+   <p class="mb-8 text-sm font-medium text-gray-200 md:text-lg" id="tahlil"> </p> <a href="index2.html" class="px-8 py-3 text-base font-bold rounded-full transition duration-300 bg-gradient-to-r from-blue-600 to-indigo-500 text-white hover:from-purple-500 hover:to-indigo-400 hover:shadow-[0_0_20px_#c084fc]" id="closealert"> تایید و بستن </a> </div> </div>
+</body>
+  <script>
+    const data = [
+      {
+        id: 1,
+        question:' هدف اصلی در طراحی ریسپانسیو (Responsive Web Design) چیست؟',
+        answer: {
+          ans1 :'الف) استفاده از جاوا اسکریپت برای تغییر ظاهر سایت.',
+          ans2 :'ب) طراحی سایت به گونه‌ای که در اندازه‌های مختلف صفحه نمایش، طرح‌بندی و محتوا بهینه شود.',
+          ans3 :'ج) استفاده صرف از تصاویر با وضوح بالا.',
+          ans4 :'د) طراحی منحصراً برای دستگاه‌های موبایل.',
+        },
+        number: 1,
+      },
+      {
+        id: 2,
+        question: ' کدام ساختار CSS برای اعمال استایل‌های متفاوت بر اساس ویژگی‌های دستگاه (مانند عرض صفحه) استفاده می‌شود؟',
+        answer: {
+          ans1:'الف) @font-face',
+          ans2: 'ب) @keyframes',
+          ans3: 'ج) @media',
+          ans4: 'د) @supports',
+        },
+        number: 2,
+      },
+      {
+        id:3+ '-',
+        question: 'در یک Media Query، چه عبارتی برای هدف قرار دادن صفحاتی با عرض بیشتر از ۱۲۰۰ پیکسل استفاده می‌شود؟',
+        answer: {
+          ans1: 'الف) max-width: 1200px',
+          ans2: 'ب) min-width: 1200px',
+          ans3: 'ج) width: > 1200px',
+          ans4: 'د) only screen',
+        },
+        number: 1,
+      },
+      {
+        id: 4,
+        question: ' رویکرد “Mobile-First” در طراحی ریسپانسیو به چه معناست؟',
+        answer: {
+          ans1: 'الف) ابتدا ظاهر سایت را برای موبایل طراحی کرده و سپس برای دسکتاپ بزرگتر می‌کنیم',
+          ans2:'ب) ابتدا محتوا و استایل پایه را برای دستگاه‌های موبایل طراحی کرده و سپس با استفاده از Media Query استایل‌های اضافی برای صفحه‌نمایش‌های بزرگتر اضافه می‌کنیم',
+          ans3: 'ج) طراحی سایت را تنها برای گوشی‌های هوشمند انجام می‌دهیم',
+          ans4: 'د) استفاده از فریم‌ورک‌هایی مانند Bootstrap به جای CSS خالص',
+        },
+        number: 1,
+      },
+      {
+        id: 5,
+        question: ' کدام یک از موارد زیر یک واحد اندازه‌گیری ریسپانسیو (Relative Unit) در CSS محسوب نمی‌شود؟',
+        answer: {
+          ans1: 'الف) em',
+          ans2: 'ب) rem',
+          ans3: 'ج) px',
+          ans4:'د) %',
+        },
+        number: 2,
+      },
+      {
+        id: 6,
+        question: 'واحد vh در CSS مخفف چیست و به چه چیزی وابسته است؟',
+        answer: {
+          ans1:'الف) Viewport Height (ارتفاع ناحیه دید)',
+          ans2: 'ب) Vertical Header (سربرگ عمودی)',
+          ans3: 'ج) Virtual Height (ارتفاع مجازی)',
+          ans4: 'د) Variable Horizontal (افقی متغیر)',
+        },
+        number: 0,
+      },
+      {
+        id:7,
+        question:'اگر بخواهیم استایل خاصی فقط زمانی اعمال شود که عرض صفحه حداکثر ۹۹۲ پیکسل باشد، کدام سینتکس صحیح است؟',
+        answer: {
+          ans1: 'الف) @media (min-width: 992px)',
+          ans2:'د) @media all and (size < 992px)',
+          ans3: 'ج) @media (width: 992px)',
+          ans4: 'د) @media screen and (max-width: 992px)',
+        },
+        number: 3,
+      },
+      {
+        id: 8,
+        question: ' کدام واحد CSS به اندازه فونت ریشه (<html>) وابسته است و برای کنترل مقیاس‌پذیری متن ایده‌آل است؟',
+        answer: {
+          ans1:'الف) em',
+          ans2: 'ب) vw',
+          ans3:'ج) vh',
+          ans4: 'د) rem',
+        },
+        number: 3,
+      },
+      {
+        id:9,
+        question:'اگر بخواهیم عرض یک المان همیشه ۱۰ درصد از عرض کل پنجره مرورگر باشد، از کدام واحد استفاده می‌کنیم؟',
+        answer: {
+          ans1: 'الف) 10%',
+          ans2: 'ب) 10vw',
+          ans3:'ج) 10em',
+          ans4:'د) 10px',
+        },
+        number: 1,
+      },
+      {
+        id: 10,
+        question: ' استفاده از max-width: 100% بر روی یک تصویر (<img>) در HTML چه تأثیری دارد؟',
+        answer: {
+          ans1:'الف) تصویر را به اندازه عرض والد خود در می‌آورد، اما اگر عرض والد کمتر از اندازه اصلی تصویر باشد، تصویر کوچک می‌شود.',
+          ans2:'ب) اندازه تصویر را به طور دائم روی ۱۰۰ پیکسل تنظیم می‌کند.',
+          ans3: 'ج) باعث می‌شود تصویر همیشه در مرکز صفحه قرار گیرد.',
+          ans4:'د) هیچ تأثیری ندارد',
+        },
+        number: 0,
+      },
+      {
+        id: 11,
+        question: ' در طراحی ریسپانسیو، برای تصاویر بزرگ، استفاده از خاصیت picture در HTML5 چه مزیتی نسبت به استفاده از <img> ساده دارد؟',
+        answer: {
+          ans1:'الف) امکان تعریف مسیرهای مختلف برای تصاویر بر اساس Media Query ها (Context-aware loading).',
+          ans2:'ب) بهینه‌سازی خودکار سایز تصویر بدون نیاز به CSS',
+          ans3:'ج) امکان استفاده از فرمت‌های جدید تصویر مانند WebP به صورت پیش‌فرض.',
+          ans4: 'د) نمایش تصاویر با کیفیت بالاتر در مرورگرهای قدیمی.',
+        },
+        number: 0,
+      },
+      {
+        id: 12,
+        question:' اگر بخواهیم برای مرورگرهایی که از Media Query پشتیبانی نمی‌کنند، یک طرح‌بندی پیش‌فرض (Fallback) داشته باشیم، باید استایل‌ها را چگونه قرار دهیم؟',
+        answer: {
+          ans3:'الف) استایل‌های ریسپانسیو را ابتدا و استایل‌های اصلی را بعداً قرار دهیم.',
+          ans1:'ب) استایل‌های اصلی را درون یک Media Query با عرض بسیار زیاد قرار دهیم',
+          ans2: 'ج) استایل‌های ریسپانسیو را باید درون تگ <noscript> قرار دهیم',
+          ans4: 'د) استایل‌های اصلی (بدون Query) را ابتدا و استایل‌های شرطی را بعداً قرار دهیم',
+        },
+        number: 3,
+      },
+      {
+        id: 13,
+        question: ' کدام قابلیت Flexbox به شما اجازه می‌دهد که آیتم‌ها در صورت کمبود فضا، به خط بعدی منتقل شوند؟',
+        answer: {
+          ans1:'الف) justify-content',
+          ans2: 'ب) align-items',
+          ans3:'ج) flex-direction',
+          ans4: 'د) flex-wrap',
+        },
+        number: 3,
+      },
+      {
+        id:14,
+        question: ' در CSS Grid، برای تعریف سطرهایی که عرض آنها به صورت خودکار با محتوا یا فضای باقی‌مانده پر شود، از کدام واحد استفاده می‌کنیم؟',
+        answer: {
+          ans1: 'الف) auto',
+          ans2:'ب) fr (Fractional Unit)',
+          ans3: 'ج) minmax()',
+          ans4:'د) repeat()',
+        },
+        number: 1,
+      },
+      {
+        id: 15,
+        question:'در یک Layout بر اساس Grid، اگر بخواهیم یک آیتم در دو ستون و سه سطر قرار گیرد، از کدام دستورات استفاده می‌کنیم؟',
+        answer: {
+          ans1: 'الف) grid-column: 1 / span 2; و grid-row: 1 / span 3;',
+          ans2:'ب) grid-column: 2; و grid-row: 3;',
+          ans3:'ج) grid-area: 2/3;',
+          ans4: 'د) grid-span: 2; و grid-height: 3;',
+        },
+        number: 0,
+      },
+      {
+        id: 16,
+        question: 'کدام ویژگی Grid به ما اجازه می‌دهد تا فضاهای خالی بین ستون‌ها را تعریف کنیم؟',
+        answer: {
+          ans1:'الف) row-gap و column-gap (یا فقط gap)',
+          ans2:'ب) padding',
+          ans3:'ج) margin',
+          ans4: 'د) align-content',
+        },
+        number: 0,
+      },
+      {
+        id: 17,
+        question: ' اگر از Flexbox استفاده می‌کنیم و می‌خواهیم آیتم‌ها در عرض صفحه به صورت خودکار در چند سطر قرار بگیرند، کدام خاصیت کلیدی است؟',
+        answer: {
+          ans1: 'الف) flex-basis',
+          ans2:'ب) flex-grow',
+          ans3:'ج) flex-shrink',
+          ans4: 'د) flex-wrap',
+        },
+        number: 3,
+      },
+      {
+        id: 18,
+        question:'Viewport Meta Tag در تگ <head> برای طراحی ریسپانسیو حیاتی است. کدام مقدار برای خاصیت content آن مناسب است؟',
+        answer: {
+          ans1: 'الف) width=device-width, initial-scale=1.0',
+          ans2: 'ب) width=1000px, user-scalable=no',
+          ans3: 'ج) orientation=portrait',
+          ans4: 'د) height=device-height',
+        },
+        number: 0,
+      },
+      {
+        id: 19,
+        question: ' کدام ابزار/تکنیک برای اطمینان از اینکه طرح‌بندی‌ها در دستگاه‌های مختلف به درستی کار می‌کنند، ضروری است؟',
+        answer: {
+          ans1:'الف) استفاده از اسلایدرهای جاوا اسکریپت سنگین.',
+          ans2: 'ب) استفاده از ابزارهای Developer Tools مرورگر (مانند Device Mode یا Responsive Design Mode).',
+          ans3: 'ج) استفاده از فریم‌ورک‌های قدیمی مانند jQuery UI.',
+          ans4: 'د) قفل کردن عرض صفحه با CSS.',
+        },
+        number: 1,
+      },
+      {
+        id: 20,
+        question: 'در رویکرد Mobile-First، Media Query های ما معمولاً از چه نوع محدودیتی استفاده می‌کنند؟',
+        answer: {
+          ans1: 'الف) فقط max-width',
+          ans2:'ب) فقط min-width',
+          ans3: 'ج) هر دو به صورت مساوی',
+          ans4: 'د) از orientation استفاده می‌کنند.',
+        },
+        number: 1,
+      },
+    ];
+  </script>
+  <script src="script1.js"></script>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body
+  class="flex items-center justify-center px-4 overflow-x-hidden text-white select-none min-h-dvh bg" id="star" 
+>
+  <div
+    class="w-full  sm:max-w-xl
+           my-6 p-5 sm:p-7
+           bg-white/10 backdrop-blur-xl
+           rounded-3xl
+           border border-white/10
+           shadow-[0_0_60px_rgba(99,102,241,0.25)]
+           transition-all duration-500
+           hover:shadow-[0_0_90px_rgba(34,211,238,0.35)]
+           hover:-translate-y-1 z-50"
+  >
+    <div class="flex items-center justify-between mb-4 text-sm">
+      <div class="flex gap-1 text-cyan-300">
+        امتیاز:
+        <span class="font-bold text-white">20 /</span>
+        <span id="showscore" class="font-bold text-cyan-400">0</span>
+      </div>
+
+      <div class="flex gap-1 text-violet-300">
+        سوال:
+        <span id="countquestion" class="font-bold text-white"></span>
+      </div>
+    </div>
+    <div class="flex gap-2 pb-2 mb-4 border-b border-white/20 sm:mb-6">
+      <span id="id" class="font-bold text-cyan-400"></span>
+      <p id="question" class="text-sm font-bold leading-relaxed sm:text-lg"></p>
+    </div>
+    <div class="space-y-2">
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+    </div>
+    <button
+      class="w-full mt-6 py-2
+             rounded-2xl font-extrabold text-lg
+             bg-gradient-to-r from-cyan-400 via-indigo-500 to-violet-500
+             shadow-[0_0_30px_rgba(99,102,241,0.6)]
+             hover:scale-[1.03]
+             hover:shadow-[0_0_50px_rgba(34,211,238,0.8)]
+             "
+    >
+      ثبت پاسخ
+    </button>
+
+  </div>
+  <!-- alert --> <div id="scoreAlertPersian" class="fixed inset-0 items-center justify-center bg-black/90 z-[999] hidden "> <div class="relative w-[85%] max-w-md p-8 md:p-10 rounded-xl border border-blue-500/50 shadow-[0_0_60px_10px_rgba(168,85,247,0.2)] bg-blue-900/45 backdrop-blur-sm text-center transition-all duration-500 animate-scale-in"> <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(168,85,247,0.2),_transparent_80%)] pointer-events-none rounded-xl"></div>
+   <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-6 drop-shadow-[0_0_10px_#a855f7]"> امتیاز شما </h2>
+   <p class="text-7xl md:text-8xl font-black  mb-6 drop-shadow-[0_0_20px_#34d399]" id="scorepercent"> <span class="ml-1 text-4xl text-white md:text-5xl">%</span> <img src="img/wired-flat-1103-confetti-hover-pinch.gif" alt="" > </p>
+   <p class="mb-8 text-sm font-medium text-gray-200 md:text-lg" id="tahlil"> </p> <a href="index2.html" class="px-8 py-3 text-base font-bold rounded-full transition duration-300 bg-gradient-to-r from-blue-600 to-indigo-500 text-white hover:from-purple-500 hover:to-indigo-400 hover:shadow-[0_0_20px_#c084fc]" id="closealert"> تایید و بستن </a> </div> </div>
+</body>
+  <script>
+    const data = [
+      {
+        id: 1,
+        question:'مهم‌ترین هدف از خواندن کد (Code Reading) چیست؟',
+        answer: {
+          ans1 : 'الف) پیدا کردن باگ‌های پنهان تنها',
+          ans2 :'ب) درک ساختار کلی پروژه و منطق پیاده‌سازی شده ',
+          ans3 :'ج) بازنویسی کامل کد از ابتدا',
+          ans4 :'د) صرفاً بررسی سینتکس (Syntax)'
+        },
+        number: 1,
+      },
+      {
+        id: 2,
+        question: ' در جاوا اسکریپت، زمانی که با یک تابع ناشناخته مواجه می‌شوید، اولین قدم برای درک عملکرد آن چیست؟',
+        answer: {
+          ans1:'الف) حذف کردن تابع و جایگزینی آن با یک راه حل ساده‌تر',
+          ans2: 'ب) جستجوی نام تابع در کل پروژه برای یافتن محل فراخوانی',
+          ans3: 'ج) بررسی امضا (Signature) تابع (پارامترها و نوع خروجی) و توابع داخلی آن',
+          ans4: 'د) فرض کردن این‌که تابع وظیفه استاندارد DOM Manipulation را انجام می‌دهد',
+        },
+        number: 2,
+      },
+      {
+        id:3,
+        question: ' خوانایی (Readability) کد به چه معناست؟',
+        answer: {
+          ans1: 'الف) کد باید کوتاه‌ترین طول ممکن را داشته باشد.',
+          ans2: 'ب) کد باید به راحتی توسط انسان قابل درک، نگهداری و اصلاح باشد.',
+          ans3: " ج) کد باید از جدیدترین ویژگی‌های زبان استفاده کند.",
+          ans4: " د) کد باید فقط توسط یک نفر قابل فهم باشد. ",
+        },
+        number: 1,
+      },
+      {
+        id: 4,
+        question: ' در یک پروژه React، مواجهه با یا در یک کامپوننت نشان‌دهنده چیست؟',
+        answer: {
+          ans1: 'الف) تلاشی برای بهینه‌سازی عملکرد از طریق جلوگیری از محاسبات یا تعاریف تکراری',
+          ans2: 'ب) یک خطای سینتکسی مهم',
+          ans3: 'ج) استفاده از یک Hook غیرمجاز ',
+          ans4: 'د) کامپوننت نیازمند بازنویسی کامل است',
+        },
+        number: 0,
+      },
+      {
+        id: 5,
+        question: 'اگر با یک فایل با پسوند در یک پروژه مواجه شوید، محتوای آن معمولاً چیست؟',
+        answer: {
+          ans1: 'الف) فایل تنظیمات لودر Webpack',
+          ans2: 'ب) کد CSS ماژولار ',
+          ans3: 'د) فایل تعریف تایپ‌ها (Type Definitions) برای TypeScript ',
+          ans4:'د)هیچ کدام'
+        },
+        number: 2,
+      },
+      {
+        id: 6,
+        question: 'در مواجهه با یک Selector پیچیده در CSS (مثلاً )، بهترین رویکرد برای درک سریع چیست؟',
+        answer: {
+          ans1:'الف) تجزیه آن به قسمت‌های کوچک‌تر (انتخاب‌گر والد، فرزند، شبه کلاس، و صفت) ',
+          ans2: 'ب) بازنویسی آن با استفاده از کلاس‌های ساده‌تر',
+          ans3: ' ج) جستجوی آن در Stack Overflow',
+          ans4: 'د) نادیده گرفتن آن چون احتمالاً قدیمی است',
+        },
+        number: 0,
+      },
+      {
+        id:7,
+        question: 'یک کامپوننت که وظایف زیادی دارد (مانند دریافت داده، مدیریت حالت و رندرینگ UI) به احتمال زیاد نمونه‌ای از کدام مشکل است؟',
+        answer: {
+          ans1: 'الف) استفاده بیش از حد از Redux',
+          ans2: 'ب) کامپوننت سنگین (God Component) یا نقض اصل مسئولیت واحد (SRP)',
+          ans3: ' ج) استفاده نادرست از Promises ',
+          ans4: 'د) مشکل در تنظیمات Webpack',
+        },
+        number: 1,
+      },
+      {
+        id: 8,
+        question: ' در معماری‌های مبتنی بر مؤلفه (Component-based)، هنگام خواندن کد، تمرکز اصلی باید بر روی چه چیزی باشد؟',
+        answer: {
+          ans1:'الف) نحوه تعامل توابع داخلی با متغیرهای سراسری',
+          ans2: 'ب) ورودی‌ها (Props)، خروجی‌ها (Events/Callbacks) و وضعیت داخلی (State) کامپوننت',
+          ans3:'ج) سرعت بارگذاری اولیه اسکریپت ',
+          ans4: 'د) ساختار پوشه‌بندی فایل‌ها',
+        },
+        number: 1,
+      },
+      {
+        id:9,
+        question: ' اگر در یک پروژه از الگوی Observer یا Publish/Subscribe استفاده شده باشد، هنگام خواندن کد باید به دنبال چه چیزی باشیم؟',
+        answer: {
+          ans1: 'الف) تعریف کلاس‌های بسیار بزرگ ',
+          ans2: 'ب) استفاده از async/await ',
+          ans3:'ج) هرجا که از document.getElementById استفاده شده است',
+          ans4:'د) جایی که یک شیء (Publisher) رویدادها را منتشر می‌کند و جایی که اشیاء دیگر (Subscribers) برای آن رویدادها مشترک شده‌اند.',
+        },
+        number: 3,
+      },
+      {
+        id: 10,
+        question: 'مفهوم "Side Effect" در توابع جاوا اسکریپت (مانند توابع یک React Hook) به چه معناست؟',
+        answer: {
+          ans1: 'الف) تابعی که همیشه یک مقدار بازمی‌گرداند.',
+          ans2:'ب) تابعی که فقط با پارامتر های ورودی کار می کند',
+          ans3: 'ج) تابعی که علاوه بر برگرداندن مقدار، محیط بیرون از تابع را نیز تغییر می‌دهد (مانند تغییر DOM یا فراخوانی API)',
+          ans4:'د) تابعی که فقط در مرورگرهای جدید کار می‌کند.',
+        },
+        number: 2,
+      },
+      {
+        id: 11,
+        question: ' نقش Source Maps در فرآیند درک کد تولید شده (Minified/Bundled) چیست؟',
+        answer: {
+          ans1:'الف) فعال کردن Hot Module Replacement ',
+          ans2:'ب) فشرده‌سازی نهایی کد',
+          ans3: 'ج) امکان نگاشت کد اجرایی (Bundled) به کد اصلی و قابل خواندن توسعه‌دهنده ',
+          ans4: ' د) تعریف متغیرهای محیطی (Environment Variables)',
+        },
+        number: 2,
+      },
+      {
+        id: 12,
+        question: 'استفاده از ابزارهایی مانند ESLint یا Prettier هنگام خواندن کد چه کمکی می‌کند؟',
+        answer: {
+          ans3: 'الف) تضمین می‌کند که کد از یک سبک نوشتاری ثابت پیروی می‌کند و خطاهای رایج را مشخص می‌سازد',
+          ans1: 'ب) سرعت بارگذاری صفحه را افزایش می‌دهد.',
+          ans2: 'ج)فقط برای کامپایل کد استفاده می شود.',
+          ans4: 'د) کد را به صورت خودکار اجرا می‌کند.',
+        },
+        number: 0,
+      },
+      {
+        id: 13+ '-',
+        question: 'در یک فایل پیکربندی Webpack (مثلاً )، کدام بخش بیشترین اهمیت را برای فهمیدن نحوه بسته‌بندی فایل‌ها دارد؟',
+        answer: {
+          ans1: 'الف) بخش optimization',
+          ans2: ' ب) بخش resolve',
+          ans3:'ج) بخش stats',
+          ans4: 'د) بخش entry و output',
+        },
+        number: 3,
+      },
+      {
+        id:14+ '-',
+        question: 'اگر در حین خواندن کد با یک شیء بزرگ مواجه شوید که مملو از کلیدهایی مانند , , , است، احتمالاً با چه چیزی روبرو هستید؟',
+        answer: {
+          ans1: 'الف) یک متغیر ساده',
+          ans2:'ب) یک ساختار داده‌ای استاندارد شده برای مدیریت وضعیت (State Management) ',
+          ans3: 'ج) یک رشته‌ی JSON رمزگذاری شده',
+          ans4: 'د) یک کامنت قدیمی',
+        },
+        number: 1,
+      },
+      {
+        id: 15,
+        question: 'در TypeScript، اگر با نوع به جای مواجه شوید، این نشان‌دهنده چیست؟',
+        answer: {
+          ans1: ' الف) یک رویکرد سخت‌گیرانه‌تر که نیاز به بررسی و کاستن نوع (Type Narrowing) قبل از استفاده دارد',
+          ans2:'ب) تایپ به درستی تعریف نشده است.',
+          ans3: 'ج) کد قدیمی است. ',
+          ans4: ' د) کد به هیچ وجه تایپ‌بندی نشده است.',
+        },
+        number: 0,
+      },
+      {
+        id: 16+ '-',
+        question: ' بهترین روش برای رهگیری جریان داده (Data Flow) در یک اپلیکیشن پیچیده فرانت‌اند چیست؟',
+        answer: {
+          ans1: 'الف) حدس زدن مسیر اجرای برنامه',
+          ans2:'ب) استفاده از ابزارهای دیباگ مرورگر (Breakpoints، Watch) و دنبال کردن تغییرات State/Props ',
+          ans3:'ج)خواندن تمام فایل ها به صورت خط به خط',
+          ans4: 'د) اجرای کد در یک محیط بدون UI',
+        },
+        number: 1,
+      },
+      {
+        id: 17,
+        question: 'مواجهه با کد "Callback Hell" (زنجیره‌ای از توابع تو در تو از طریق Callbackها) معمولاً نشان‌دهنده چه مشکلی است؟',
+        answer: {
+          ans1: 'الف) بهینه‌سازی بیش از حد',
+          ans2:'ب) کد بسیار خوانا است.',
+          ans3: 'ج) استفاده از سینتکس قدیمی جاوا اسکریپت',
+          ans4: 'د) مدیریت ضعیف عملیات‌های ناهمزمان (Asynchronous Operations)',
+        },
+        number: 3,
+      },
+      {
+        id: 18,
+        question: 'هنگام خواندن کدی که به شدت از دستکاری مستقیم DOM (مانند ) به جای استفاده از یک فریمورک/کتابخانه مانند React استفاده می‌کند، اولین نگرانی چیست؟',
+        answer: {
+          ans1: 'الف) سرعت اجرای آن کندتر است.',
+          ans2: ' ب) عدم پشتیبانی از CSS',
+          ans3: 'ج) احتمال تداخل، اشکالات همگام‌سازی وضعیت (State Synchronization) و دشواری در نگهداری.',
+          ans4: 'د) عدم استفاده از var.',
+        },
+        number: 2,
+      },
+      {
+        id: 19,
+        question: 'در مورد کد بهینه‌سازی شده، اگر با یک عبارت طولانی از عملگرهای بیتی (Bitwise Operators) مواجه شوید که برای فشرده‌سازی منطق استفاده شده، درک آن دشوار است. چه کاری باید انجام دهید؟',
+        answer: {
+          ans1:'الف) به دنبال کامنت‌هایی باشید که منطق اصلی را توضیح می‌دهند یا آن بخش را به منطق ساده‌تر تبدیل کنید.',
+          ans2: 'ب) فرض کنید کد اشتباه است.',
+          ans3: ' ج) آن را حذف کنید',
+          ans4: 'د) از آن استفاده نکنید.',
+        },
+        number: 0,
+      },
+      {
+        id: 20,
+        question: 'کدام تکنیک در خواندن کد به شما کمک می‌کند تا بفهمید یک متغیر در طول عمر برنامه چه مقادیری داشته است؟',
+        answer: {
+          ans1: 'الف) فقط خواندن خط تعریف متغیر.',
+          ans2: 'ب) استفاده از قابلیت Watch در دیباگر مرورگر برای مشاهده تغییرات آن در زمان اجرا.',
+          ans3: 'ج) تغییر نام متغیر به یک نام توصیفی‌تر.',
+          ans4: 'د) کامپایل مجدد پروژه.',
+        },
+        number: 1,
+      },
+    ];
+  </script>
+  <script src="script1.js"></script>
+</html>

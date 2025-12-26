@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body
+  class="flex items-center justify-center px-4 overflow-x-hidden text-white select-none min-h-dvh bg" id="star"
+>
+  <div
+    class="w-full  sm:max-w-xl
+           my-6 p-5 sm:p-7
+           bg-white/10 backdrop-blur-xl
+           rounded-3xl
+           border border-white/10
+           shadow-[0_0_60px_rgba(99,102,241,0.25)]
+           transition-all duration-500
+           hover:shadow-[0_0_90px_rgba(34,211,238,0.35)]
+           hover:-translate-y-1 z-50"
+  >
+    <div class="flex items-center justify-between mb-4 text-sm">
+      <div class="flex gap-1 text-cyan-300">
+        امتیاز:
+        <span class="font-bold text-white">20 /</span>
+        <span id="showscore" class="font-bold text-cyan-400">0</span>
+      </div>
+
+      <div class="flex gap-1 text-violet-300">
+        سوال:
+        <span id="countquestion" class="font-bold text-white"></span>
+      </div>
+    </div>
+    <div class="flex gap-2 pb-2 mb-4 border-b border-white/20 sm:mb-6">
+      <span id="id" class="font-bold text-cyan-400"></span>
+      <p id="question" class="text-sm font-bold leading-relaxed sm:text-lg"></p>
+    </div>
+    <div class="space-y-2">
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+    </div>
+    <button
+      class="w-full mt-6 py-2
+             rounded-2xl font-extrabold text-lg
+             bg-gradient-to-r from-cyan-400 via-indigo-500 to-violet-500
+             shadow-[0_0_30px_rgba(99,102,241,0.6)]
+             hover:scale-[1.03]
+             hover:shadow-[0_0_50px_rgba(34,211,238,0.8)]
+             "
+    >
+      ثبت پاسخ
+    </button>
+
+  </div>
+  <!-- alert --> <div id="scoreAlertPersian" class="fixed inset-0 items-center justify-center bg-black/90 z-[999] hidden "> <div class="relative w-[85%] max-w-md p-8 md:p-10 rounded-xl border border-blue-500/50 shadow-[0_0_60px_10px_rgba(168,85,247,0.2)] bg-blue-900/45 backdrop-blur-sm text-center transition-all duration-500 animate-scale-in"> <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(168,85,247,0.2),_transparent_80%)] pointer-events-none rounded-xl"></div>
+   <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-6 drop-shadow-[0_0_10px_#a855f7]"> امتیاز شما </h2>
+   <p class="text-7xl md:text-8xl font-black  mb-6 drop-shadow-[0_0_20px_#34d399]" id="scorepercent"> <span class="ml-1 text-4xl text-white md:text-5xl">%</span> <img src="img/wired-flat-1103-confetti-hover-pinch.gif" alt="" > </p>
+   <p class="mb-8 text-sm font-medium text-gray-200 md:text-lg" id="tahlil"> </p> <a href="index2.html" class="px-8 py-3 text-base font-bold rounded-full transition duration-300 bg-gradient-to-r from-blue-600 to-indigo-500 text-white hover:from-purple-500 hover:to-indigo-400 hover:shadow-[0_0_20px_#c084fc]" id="closealert"> تایید و بستن </a> </div> </div>
+</body>
+  <script>
+  const data = [
+  {
+    id: 1,
+    question: 'منظور از State در برنامه‌نویسی فرانت‌اند چیست؟',
+    answer: {
+      ans1: 'الف) داده‌های ثابت برنامه',
+      ans2: 'ب) داده‌هایی که در طول اجرای برنامه تغییر می‌کنند',
+      ans3: 'ج) فقط تنظیمات سرور',
+      ans4: 'د) کدهای HTML'
+    },
+    number: 1
+  },
+  {
+    id: 2,
+    question: 'کدام گزینه نمونه‌ای از State در یک اپلیکیشن فرانت‌اند است؟',
+    answer: {
+      ans1: 'الف) رنگ پس‌زمینه ثابت',
+      ans2: 'ب) مقدار ورودی input',
+      ans3: 'ج) فایل CSS',
+      ans4: 'د) ساختار HTML'
+    },
+    number: 1
+  },
+  {
+    id: 3,
+    question: 'چرا مدیریت State اهمیت دارد؟',
+    answer: {
+      ans1: 'الف) برای کاهش حجم فایل‌ها',
+      ans2: 'ب) برای حذف جاوااسکریپت',
+      ans3: 'ج) برای مدیریت سرور',
+      ans4: 'د) برای هماهنگی داده و رابط کاربری',
+    },
+    number: 3
+  },
+  {
+    id: 4,
+    question: 'در React کدام هوک برای مدیریت State محلی استفاده می‌شود؟',
+    answer: {
+      ans1: 'الف) useEffect',
+      ans2: 'ب) useContext',
+      ans3: 'ج) useState',
+      ans4: 'د) useRef'
+    },
+    number: 2
+  },
+  {
+    id: 5,
+    question: 'State محلی (Local State) معمولاً در کجا نگهداری می‌شود؟',
+    answer: {
+      ans2: 'الف) در نزدیک‌ترین کامپوننت',
+      ans1: 'ب) در کل اپلیکیشن',
+      ans3: 'ج) در سرور',
+      ans4: 'د) در دیتابیس'
+    },
+    number: 0
+  },
+  {
+    id: 6,
+    question: 'مشکل اصلی Prop Drilling چیست؟',
+    answer: {
+      ans1: 'الف) کاهش امنیت',
+      ans2: 'ب) انتقال داده از طریق چندین کامپوننت غیرضروری',
+      ans3: 'ج) افزایش سرعت برنامه',
+      ans4: 'د) خطای سینتکس'
+    },
+    number: 1
+  },
+  {
+    id: 7,
+    question: 'کدام راهکار برای حل Prop Drilling مناسب است؟',
+    answer: {
+      ans1: 'الف) useState',
+      ans2: 'ب) Context API',
+      ans3: 'ج) useRef',
+      ans4: 'د) useMemo'
+    },
+    number: 1
+  },
+  {
+    id: 8,
+    question: 'Redux بیشتر برای مدیریت چه نوع State استفاده می‌شود؟',
+    answer: {
+      ans1: 'الف) State موقتی',
+      ans2: 'ب) State محلی',
+      ans3: 'ج) State سراسری (Global)',
+      ans4: 'د) State مربوط به استایل'
+    },
+    number: 2
+  },
+  {
+    id: 9,
+    question: 'اصل Single Source of Truth مربوط به کدام مفهوم است؟',
+    answer: {
+      ans1: 'الف) CSS',
+      ans2: 'ب) Redux',
+      ans3: 'ج) HTML',
+      ans4: 'د) Responsive Design'
+    },
+    number: 1
+  },
+  {
+    id: 10,
+    question: 'در Redux، State چگونه تغییر می‌کند؟',
+    answer: {
+      ans1: 'الف) تغییر مستقیم',
+      ans2: 'ب) با setState',
+      ans3: 'ج) با props',
+      ans4: 'د) با dispatch کردن action',
+    },
+    number: 3
+  },
+  {
+    id: 11,
+    question: 'Reducer در Redux چه وظیفه‌ای دارد؟',
+    answer: {
+      ans1: 'الف) ارسال درخواست API',
+      ans2: 'ب) تغییر State بر اساس Action',
+      ans3: 'ج) رندر UI',
+      ans4: 'د) ذخیره داده در LocalStorage'
+    },
+    number: 1
+  },
+  {
+    id: 12,
+    question: 'Context API بیشتر برای چه حالتی مناسب است؟',
+    answer: {
+      ans1: 'الف) داده‌های ساده و اشتراکی',
+      ans2: 'ب) پروژه‌های بسیار پیچیده',
+      ans3: 'ج) مدیریت دیتابیس',
+      ans4: 'د) انیمیشن‌ها'
+    },
+    number: 0
+  },
+  {
+    id: 13,
+    question: 'کدام کتابخانه جایگزین سبک‌تری برای Redux محسوب می‌شود؟',
+    answer: {
+      ans1: 'الف) Zustand',
+      ans2: 'ب) Axios',
+      ans3: 'ج) Lodash',
+      ans4: 'د) jQuery'
+    },
+    number: 0
+  },
+  {
+    id: 14,
+    question: 'مزیت اصلی State سراسری چیست؟',
+    answer: {
+      ans1: 'الف) کاهش مصرف RAM',
+      ans2: 'ب) دسترسی آسان کامپوننت‌ها به داده مشترک',
+      ans3: 'ج) حذف React',
+      ans4: 'د) افزایش CSS'
+    },
+    number: 1
+  },
+  {
+    id: 15,
+    question: 'کدام State بهتر است محلی باقی بماند؟',
+    answer: {
+      ans1: 'الف) وضعیت لاگین',
+      ans2: 'ب) تم اپلیکیشن',
+      ans3: 'ج) مقدار input یک فرم',
+      ans4: 'د) اطلاعات کاربر'
+    },
+    number: 2
+  },
+  {
+    id: 16,
+    question: 'Immutable بودن State به چه معناست؟',
+    answer: {
+      ans1: 'الف) حذف‌پذیر بودن',
+      ans2: 'ب) ذخیره در دیتابیس',
+      ans3: 'ج) فقط خواندنی بودن UI',
+       ans4: 'د) تغییر مستقیم ندادن State',
+    },
+    number: 3
+  },
+  {
+    id: 17,
+    question: 'کدام ابزار برای مدیریت async state در Redux استفاده می‌شود؟',
+    answer: {
+      ans1: 'الف) Redux Thunk',
+      ans2: 'ب) useRef',
+      ans3: 'ج) PropTypes',
+      ans4: 'د) Context'
+    },
+    number: 0
+  },
+  {
+    id: 18,
+    question: 'State بیش از حد چه مشکلی ایجاد می‌کند؟',
+    answer: {
+      ans1: 'الف) افزایش سرعت',
+      ans2: 'ب) پیچیدگی و سختی نگهداری',
+      ans3: 'ج) کاهش خطا',
+      ans4: 'د) بهبود UX'
+    },
+    number: 1
+  },
+  {
+    id: 19,
+    question: 'بهترین محل نگهداری State کجاست؟',
+    answer: {
+      ans1: 'الف) همیشه Global',
+      ans2: 'ب) در سرور',
+      ans3: 'ج) نزدیک‌ترین کامپوننت نیازمند',
+      ans4: 'د) در CSS'
+    },
+    number: 2
+  },
+  {
+    id: 20,
+    question: 'انتخاب ابزار مدیریت State به چه چیزی بستگی دارد؟',
+    answer: {
+      ans1: 'الف) رنگ UI',
+      ans2: 'ب) اندازه و پیچیدگی پروژه',
+      ans3: 'ج) نوع مانیتور',
+      ans4: 'د) سیستم‌عامل'
+    },
+    number: 1
+  }
+];
+
+  </script>
+  <script src="script1.js"></script>
+</html>

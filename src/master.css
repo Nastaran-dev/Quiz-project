@@ -1,0 +1,83 @@
+ @keyframes twinkle {
+        0%, 100% { 
+          opacity: 0.5;
+          transform: scale(0.7);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+ @keyframes menu {
+  from {
+    opacity: 0;
+    transform: translate(-960px) scale(0.85);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(60PX) scale(1);
+    filter: blur(0);
+  }
+}
+      .star {
+       width: 1px;
+       height: 1px;
+       position: absolute;
+       background-color: gray;
+       border-radius: 50%;
+
+       animation:twinkle  2s ease-in-out infinite;
+      }
+      .ab {
+        box-shadow: 0 0 15px #00ffff60, inset 0 0 10px #00ffff40 !important;
+        background-color: #002147;
+        z-index:200;
+      }
+      .ab:hover {
+        box-shadow: 0 0 25px #00ffff, inset 0 0 15px #00ffff80 !important;
+      }
+      .abc {
+        box-shadow: 0 0 15px #00ffff60, inset 0 0 10px #00ffff40 !important;
+        z-index:200;
+      }
+      .abc:hover {
+        box-shadow: 0 0 25px #00ffff, inset 0 0 15px #00ffff80 !important;
+      }
+
+       .active {
+        background-color: #0C6791
+;
+        color: white;
+      }
+      .true {
+        background-color:#10691D;
+        color: white;
+      }
+      .false {
+        background-color:#A80A0A;
+        color: white;
+      }
+      .bg{
+        background: #4b6cb7;
+        background: linear-gradient(to right, #182848, #040e23) ;
+      }
+      @keyframes scale-in {
+      0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+     .animate-scale-in {
+      animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+      @keyframes cinematicIn {
+     0% {
+     opacity: 0;
+     transform: perspective(800px) translateY(80px) rotateX(35deg) scale(0.85);
+     filter: blur(12px);
+     }
+     100% {
+     opacity: 1;
+     transform: perspective(800px) translateY(0) rotateX(0) scale(1);
+     filter: blur(0);
+   }
+    }

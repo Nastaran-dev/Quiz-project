@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body
+  class="flex items-center justify-center px-4 overflow-x-hidden text-white select-none min-h-dvh bg" id="star"
+>
+  <div
+    class="w-full  sm:max-w-xl
+           my-6 p-5 sm:p-7
+           bg-white/10 backdrop-blur-xl
+           rounded-3xl
+           border border-white/10
+           shadow-[0_0_60px_rgba(99,102,241,0.25)]
+           transition-all duration-500
+           hover:shadow-[0_0_90px_rgba(34,211,238,0.35)]
+           hover:-translate-y-1 z-50"
+  >
+    <div class="flex items-center justify-between mb-4 text-sm">
+      <div class="flex gap-1 text-cyan-300">
+        امتیاز:
+        <span class="font-bold text-white">20 /</span>
+        <span id="showscore" class="font-bold text-cyan-400">0</span>
+      </div>
+
+      <div class="flex gap-1 text-violet-300">
+        سوال:
+        <span id="countquestion" class="font-bold text-white"></span>
+      </div>
+    </div>
+    <div class="flex gap-2 pb-2 mb-4 border-b border-white/20 sm:mb-6">
+      <span id="id" class="font-bold text-cyan-400"></span>
+      <p id="question" class="text-sm font-bold leading-relaxed sm:text-lg"></p>
+    </div>
+    <div class="space-y-2">
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+      <label
+        class="group flex items-center gap-1 p-3 rounded-2xl cursor-pointer
+               bg-white/80 text-slate-900
+               border border-transparent
+               hover:bg-gradient-to-r hover:from-cyan-400 hover:to-violet-400
+               hover:text-white hover:scale-[1.02]"
+      >
+        <input type="radio" name="quiz_question"
+               class="w-5 h-5 accent-cyan-500">
+        <span class="text-[12px] sm:text-base text"></span>
+      </label>
+
+    </div>
+    <button
+      class="w-full mt-6 py-2
+             rounded-2xl font-extrabold text-lg
+             bg-gradient-to-r from-cyan-400 via-indigo-500 to-violet-500
+             shadow-[0_0_30px_rgba(99,102,241,0.6)]
+             hover:scale-[1.03]
+             hover:shadow-[0_0_50px_rgba(34,211,238,0.8)]
+             "
+    >
+      ثبت پاسخ
+    </button>
+
+  </div>
+  <!-- alert --> <div id="scoreAlertPersian" class="fixed inset-0 items-center justify-center bg-black/90 z-[999] hidden "> <div class="relative w-[85%] max-w-md p-8 md:p-10 rounded-xl border border-blue-500/50 shadow-[0_0_60px_10px_rgba(168,85,247,0.2)] bg-blue-900/45 backdrop-blur-sm text-center transition-all duration-500 animate-scale-in"> <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(168,85,247,0.2),_transparent_80%)] pointer-events-none rounded-xl"></div>
+   <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-6 drop-shadow-[0_0_10px_#a855f7]"> امتیاز شما </h2>
+   <p class="text-7xl md:text-8xl font-black  mb-6 drop-shadow-[0_0_20px_#34d399]" id="scorepercent"> <span class="ml-1 text-4xl text-white md:text-5xl">%</span> <img src="img/wired-flat-1103-confetti-hover-pinch.gif" alt="" > </p>
+   <p class="mb-8 text-sm font-medium text-gray-200 md:text-lg" id="tahlil"> </p> <a href="index2.html" class="px-8 py-3 text-base font-bold rounded-full transition duration-300 bg-gradient-to-r from-blue-600 to-indigo-500 text-white hover:from-purple-500 hover:to-indigo-400 hover:shadow-[0_0_20px_#c084fc]" id="closealert"> تایید و بستن </a> </div> </div>
+</body>
+  <script>
+   const data = [
+  {
+    id:1,
+    question: "هدف اصلی تفکر منطقی در برنامه‌نویسی چیست؟",
+    answer: {
+      ans1: "الف) نوشتن کد زیاد",
+      ans2: "ب) حل مسئله به صورت مرحله‌به‌مرحله",
+      ans3: "ج) استفاده از سریع‌ترین زبان",
+      ans4: "د) کپی کردن کد دیگران",
+    },
+    number: 1,
+  },
+  {
+    id:2,
+    question: "الگوریتم چیست؟",
+    answer: {
+      ans1: "الف) یک زبان برنامه‌نویسی",
+      ans2: "ب) مجموعه‌ای از دستورالعمل‌های منطقی",
+      ans3: "ج) یک برنامه اجرا شده",
+      ans4: "د) یک خطای برنامه",
+    },
+    number: 1,
+  },
+  {
+    id: 3,
+    question: "کدام ساختار برای تصمیم‌گیری در برنامه استفاده می‌شود؟",
+    answer: {
+      ans1: "الف) حلقه",
+      ans2: "ب) متغیر",
+      ans3: "ج) شرط (if)",
+      ans4: "د) تابع",
+    },
+    number: 2,
+  },
+  {
+    id:4,
+    question: "حلقه (Loop) چه کاری انجام می‌دهد؟",
+    answer: {
+      ans1: "الف) برنامه را متوقف می‌کند",
+      ans2: "ب) دستورات را تکرار می‌کند",
+      ans3: "ج) خطاها را حذف می‌کند",
+      ans4: "د) داده ذخیره می‌کند",
+    },
+    number: 1,
+  },
+  {
+    id: 5,
+    question: "اولین قدم برای حل یک مسئله در برنامه‌نویسی چیست؟",
+    answer: {
+      ans1: "الف) نوشتن کد",
+      ans2: "ب) تست برنامه",
+      ans3: "ج) درک مسئله",
+      ans4: "د) انتخاب زبان",
+    },
+    number: 2,
+  },
+  {
+    id:6,
+    question: "متغیر در برنامه‌نویسی چه کاربردی دارد؟",
+    answer: {
+      ans1: "الف) تکرار عملیات",
+      ans2: "ب) ذخیره مقدار",
+      ans3: "ج) نمایش متن",
+      ans4: "د) ایجاد شرط",
+    },
+    number: 1,
+  },
+  {
+    id: 7,
+    question: "دیباگ کردن (Debug) یعنی چه؟",
+    answer: {
+      ans1: "الف) سریع نوشتن کد",
+      ans2: "ب) حذف برنامه",
+      ans3: "ج) پیدا و اصلاح خطاها",
+      ans4: "د) اضافه کردن توضیح",
+    },
+    number: 2,
+  },
+  {
+    id:8,
+    question: "عملگر منطقی «و» (AND) چه زمانی درست است؟",
+    answer: {
+      ans1: "الف) فقط یک شرط درست باشد",
+      ans2: "ب) هیچ شرطی درست نباشد",
+      ans3: "ج) همه شرط‌ها درست باشند",
+      ans4: "د) تصادفی",
+    },
+    number: 2,
+  },
+  {
+    id:9,
+    question: "کدام نماد برای بررسی برابری منطقی استفاده می‌شود؟",
+    answer: {
+      ans1: "الف) =",
+      ans2: "ب) ==",
+      ans3: "ج) !=",
+      ans4: "د) <=",
+    },
+    number: 1,
+  },
+  {
+    id: 10,
+    question: "چرا از تابع‌ها استفاده می‌کنیم؟",
+    answer: {
+      ans1: "الف) پیچیده کردن کد",
+      ans2: "ب) تکرار کد اضافی",
+      ans3: "ج) سازمان‌دهی و استفاده مجدد از کد",
+      ans4: "د) حذف متغیرها",
+    },
+    number: 2,
+  },
+  {
+    id: 11,
+    question: "نتیجه یک شرط منطقی چیست؟",
+    answer: {
+      ans1: "الف) عدد",
+      ans2: "ب) متن",
+      ans3: "ج) درست یا نادرست",
+      ans4: "د) حلقه",
+    },
+    number: 2,
+  },
+  {
+    id: 12,
+    question: "اگر شرط if نادرست باشد چه می‌شود؟",
+    answer: {
+      ans1: "الف) برنامه متوقف می‌شود",
+      ans2: "ب) کد داخل if اجرا نمی‌شود",
+      ans3: "ج) خطا رخ می‌دهد",
+      ans4: "د) شرط درست می‌شود",
+    },
+    number: 1,
+  },
+  {
+    id: 13,
+    question: "هدف از نوشتن کامنت در کد چیست؟",
+    answer: {
+      ans1: "الف) اجرای برنامه",
+      ans2: "ب) زیبایی کد",
+      ans3: "ج) توضیح منطق برنامه",
+      ans4: "د) کند کردن برنامه",
+    },
+    number: 2,
+  },
+  {
+    id: 14,
+    question: "باگ (Bug) چیست؟",
+    answer: {
+      ans1: "الف) قابلیت برنامه",
+      ans2: "ب) خطا در برنامه",
+      ans3: "ج) نوعی متغیر",
+      ans4: "د) الگوریتم",
+    },
+    number: 1,
+  },
+  {
+    id: 15,
+    question: "کدام ساختار برای انتخاب بین دو حالت استفاده می‌شود؟",
+    answer: {
+      ans1: "الف) حلقه",
+      ans2: "ب) if / else",
+      ans3: "ج) متغیر",
+      ans4: "د) کامنت",
+    },
+    number: 1,
+  },
+  {
+    id: 16,
+    question: "چرا منطق قبل از کدنویسی مهم است؟",
+    answer: {
+      ans1: "الف) برای نوشتن کد بیشتر",
+      ans2: "ب) برای کاهش خطاها",
+      ans3: "ج) برای تغییر زبان",
+      ans4: "د) برای اجرای سریع‌تر",
+    },
+    number: 1,
+  },
+  {
+    id: 17,
+    question: "شبه‌کد (Pseudo Code) چیست؟",
+    answer: {
+      ans1: "الف) زبان واقعی",
+      ans2: "ب) کد قابل اجرا",
+      ans3: "ج) توضیح منطقی مراحل برنامه",
+      ans4: "د) کامپایلر",
+    },
+    number: 2,
+  },
+  {
+    id: 18,
+    question: "عملگر منطقی «یا» (OR) چه می‌کند؟",
+    answer: {
+      ans1: "الف) همه شرط‌ها باید درست باشند",
+      ans2: "ب) درست بودن یک شرط کافی است",
+      ans3: "ج) هیچ شرطی درست نیست",
+      ans4: "د) نتیجه را برعکس می‌کند",
+    },
+    number: 1,
+  },
+  {
+    id: 19,
+    question: "کدام مورد یک روش درست در حل مسئله است؟",
+    answer: {
+      ans1: "الف) نوشتن کل کد یک‌باره",
+      ans2: "ب) تست نکردن برنامه",
+      ans3: "ج) تقسیم مسئله به بخش‌های کوچک‌تر",
+      ans4: "د) حذف شرط‌ها",
+    },
+    number: 2,
+  },
+  {
+    id: 20,
+    question: "تفکر منطقی بیشترین کمک را به چه چیزی می‌کند؟",
+    answer: {
+      ans1: "الف) حفظ سینتکس",
+      ans2: "ب) طراحی گرافیک",
+      ans3: "ج) ساختاردهی حل مسئله",
+      ans4: "د) نصب نرم‌افزار",
+    },
+    number: 2,
+  },
+];
+  </script>
+  <script src="script1.js"></script>
+</html>
